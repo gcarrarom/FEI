@@ -87,12 +87,15 @@ namespace AlgoritmoGeneticoHerbert
                 {
                     quantidadeCrossover = (tempos.Count - 1) / 2;
                 }
+                int bitsCross = 2;
                 for (int i = 0; i < quantidadeCrossover; i += 2)
                 {
-                    string temporaria = tempos[i].binario.Substring(tempos[i].binario.Length - 2);
-                    tempos[i].binario = tempos[i].binario.Remove(tempos[i].binario.Length - 2);
-                    tempos[i].SetBinario(tempos[i].binario + tempos[i + 1].binario.Substring(tempos[i + 1].binario.Length - 2));
-                    tempos[i + 1].binario = tempos[i + 1].binario.Remove(tempos[i + 1].binario.Length - 2);
+                    if (tempos[i].binario.Length > 5 && tempos[i].binario.Length > 5) bitsCross = 3;
+                    else bitsCross = 2;
+                    string temporaria = tempos[i].binario.Substring(tempos[i].binario.Length - bitsCross);
+                    tempos[i].binario = tempos[i].binario.Remove(tempos[i].binario.Length - bitsCross);
+                    tempos[i].SetBinario(tempos[i].binario + tempos[i + 1].binario.Substring(tempos[i + 1].binario.Length - bitsCross));
+                    tempos[i + 1].binario = tempos[i + 1].binario.Remove(tempos[i + 1].binario.Length - bitsCross);
                     tempos[i + 1].SetBinario(tempos[i + 1].binario + temporaria);
                 }
                 Console.WriteLine("Geração " + (k+1).ToString() + ": " + ParaString(tempos));
